@@ -1232,6 +1232,11 @@ verify_succeeds_for_good_enum_default_value_test() ->
            ["enum e { e1 = 1; e2 = 2; }"
             "message m1 { required e f1 = 1 [default=e2]; }"]).
 
+verify_succeeds_for_good_enum_deprecated_test() ->
+    ok = do_parse_verify_defs(
+           ["enum e { e1 = 1; e2 = 2 [deprecated=true]; }"
+            "message m1 { required e f1 = 1; }"]).
+
 verify_catches_undefined_enum_value_in_default_test() ->
     {error, [_]} = Error = do_parse_verify_defs(
                              ["enum e { e1 = 1; e2 = 2; }"
